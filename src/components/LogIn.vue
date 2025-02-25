@@ -5,29 +5,31 @@
     <h2>Infinity CAPITAL</h2>
     <p>Hello there, login to continue</p>
     <div class="sign_in">
-      <h3>Sign In</h3>
-      <p>Sign in to my account</p>
-      <div class="sign_in_input">
-        <p>Email</p>
-        <input 
-          placeholder="My Email"
-        />
-        <p>Password</p>
-        <input 
-          placeholder="My Password"
-        />
-        <div class="login_option">
-          <div class="remember">
-            <input type="checkbox" v-model="isChecked" :style="checkboxStyle" class="login_checkbox"/>
-            <p>Remember me</p>
+      <div>
+        <h3>Sign In</h3>
+        <p>Sign in to my account</p>
+        <div class="sign_in_input">
+          <p>Email</p>
+          <input 
+            placeholder="My Email"
+          />
+          <p>Password</p>
+          <input 
+            placeholder="My Password"
+          />
+          <div class="login_option">
+            <div class="remember">
+              <input type="checkbox" v-model="isRemembered" :style="checkboxStyle" class="login_checkbox"/>
+              <p>Remember me</p>
+            </div>
+            <p>Forgot Password</p>
           </div>
-          <p>Forgot Password</p>
+          <button>Sign In</button>        
         </div>
-        <button>Sign In</button>
         <p>Don't have an account? Sign Up Here</p>
       </div>
       <label>
-        <input type="checkbox" v-model="isChecked" :style="checkboxStyle" class="login_checkbox"/>
+        <input type="checkbox" v-model="isAgreed" :style="checkboxStyle" class="login_checkbox"/>
         <span>I agree to the Terms & Conditions & Privacy Policy Set out by this site.</span>
       </label>
     </div>
@@ -36,7 +38,8 @@
 
 <script setup>
   import { ref, computed } from "vue";
-  const isChecked = ref(false);
+  const isRemembered = ref(false);
+  const isAgreed = ref(false);
   const checkboxStyle = computed(() => ({
     width: "15px",
     height: "15px",
@@ -44,8 +47,11 @@
     borderRadius: "3px",
     backgroundColor: "#EFC4621A",
     appearance: "none",
+    display: "inline-block",
+    position: "relative",
     padding: "0",
-    margin: "0 3%",
+    margin: "0",
+    marginRight: "5px"
   }));
 </script>
 
@@ -97,6 +103,9 @@
     height: 60vh;
     background: #fff;
     border-radius: 20px 20px 0 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
   }
   h3 {
     text-align: center;
@@ -109,7 +118,7 @@
   .sign_in p {
     color: #475467;
     text-align: center;
-    margin-top: 0;
+    margin: 0;
     margin-bottom: 3%;
   }
   .sign_in_input {
@@ -152,7 +161,19 @@
     width: 40%;
   }
   .login_checkbox::after {
-    
+    content: "";
+    position: absolute;
+    display: none;
+    left: 1.5px;
+    top: 0;
+    width: 5px;
+    height: 8px;
+    border: solid #EFC462;
+    border-width: 0 2px 3px 0;
+    transform: rotate(35deg);
+  }
+  .login_checkbox:checked::after {
+    display: block;
   }
   .remember p {
     color: #000;
@@ -162,6 +183,7 @@
     width: 90%;
     height: 48px;
     padding: 12px 20px;
+    margin-bottom: 5%;
     justify-content: center;
     align-items: center;
     gap: 10px;
@@ -177,5 +199,18 @@
     font-weight: 600;
     line-height: 20px;
     letter-spacing: 0.1px;
+  }
+  label {
+    width: 90%;
+    margin-left: 5%;
+    margin-bottom: 5%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: -0.2px;
   }
 </style>
